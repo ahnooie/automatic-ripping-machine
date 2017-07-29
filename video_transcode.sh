@@ -3,6 +3,10 @@
 
 # shellcheck source=config
 # shellcheck disable=SC1091
+# shellcheck disable=SC2034
+LOG_PREFIX="Transcode_${2}"
+
+# shellcheck disable=SC1090
 source "$ARM_CONFIG"
 
 SRC=$1
@@ -11,6 +15,7 @@ HAS_NICE_TITLE=$3
 VIDEO_TYPE=$4
 TIMESTAMP=$5
 
+echo "${LOG} START transcode.sh ($LABEL -> $SRC)" | ts >> "$INFO_LOG"
 
 	TRANSSTART=$(date +%s);
 	echo "Start video transcoding script" >> "$LOG"
@@ -264,3 +269,6 @@ echo "STAT: ${ID_FS_LABEL} transcoded in ${TRANSTIME}" >> "$LOG"
 #echo /opt/arm/rename.sh $DEST
 
 echo /opt/arm/notify.sh "\"Transcode: ${ID_FS_LABEL} completed in ${TRANSTIME}\"" |at now
+
+echo "${LOG} END transcode.sh ($LABEL -> $SRC)" | ts >> "$INFO_LOG"
+

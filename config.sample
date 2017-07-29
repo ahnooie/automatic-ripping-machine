@@ -162,12 +162,24 @@ PO_APP_KEY=""
 # use the label of the DVD/CD or else use empty.log
 # this is required for udev events where there is no media available
 # such as ejecting the drive
-if [ -z "$ID_FS_LABEL" ]; then
-        LOGFILE="empty.log"
-else
-        LOGFILE=${ID_FS_LABEL}".log"
+# Create a new log for each action, but only if LOG_RESET is set
+if [ -n "${LOG_RESET}" ]; then
+   if [ -z "$ID_FS_LABEL" ]; then
+      export LOGFILE="${LOG_PREFIX}$(date --iso-8601=seconds)_empty_$(uuid).log"
+   else
+      export LOGFILE="${LOG_PREFIX}$(date --iso-8601=seconds)_${ID_FS_LABEL}_$(uuid).log"
+   fi
+   LOG_RESET=""
 fi
 
 # Set full logfile path
 LOG=$LOGPATH$LOGFILE
 
+# The INFO_LOG gives high-level messages
+INFO_LOG=${LOGPATH}info.log
+
+# If arm_wrapper.sh is called directly from the command line, this will set it
+# Set the DEVNAME to a default if it's not set
+if [ -z "${DEVNAME}" ]; then
+    DEVNAME="/dev/sr0"
+fi
