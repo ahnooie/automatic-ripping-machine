@@ -4,12 +4,12 @@ import os
 import sys # noqa # pylint: disable=unused-import
 import logging
 import classes # noqa # pylint: disable=unused-import
+import getmusictitle
 import getmovietitle
 import getvideotype
 import utils
 
 from config import cfg
-
 
 def identify(disc, logfile):
     """Identify disc attributes"""
@@ -28,7 +28,8 @@ def identify(disc, logfile):
 
     # Check to make sure it's not a data disc
     if disc.disctype == "music":
-        logging.debug("Disc is music.  Skipping identification")
+        logging.debug("Disc is music.")
+        disc.label = getmusictitle.main(disc)
     elif os.path.isdir(disc.mountpoint + "/VIDEO_TS"):
         logging.debug("Found: " + disc.mountpoint + "/VIDEO_TS")
         disc.disctype = "dvd"

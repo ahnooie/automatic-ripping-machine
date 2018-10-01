@@ -7,6 +7,12 @@
 # Distinguish UDF video discs from UDF data discs.  Requires mounting disc so adds a few seconds to the identify script.
 ARM_CHECK_UDF: true
 
+# Set to one of "none", "musicbrainz", "freecddb"
+# if "musicbrainz" is used the disc information are asked from musicbrainz.org
+# if "freecddb" is used the disc information are asked from freedb.org
+# if "none" is used no label is identified
+GET_AUDIO_TITLE: "freecddb"
+
 # When enabled if the disc is a DVD use dvdid to calculate a crc64 and query Windows Media Meta Services for the Movie Title.
 # For BluRays attempts to extract the title from an XML file on the disc
 GET_VIDEO_TITLE: true
