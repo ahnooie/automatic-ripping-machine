@@ -14,7 +14,8 @@
  - Seperate HandBrake arguments and profiles for DVD's and Bluray's
  - Set video type or automatically identify
  - Better logging
--  Auto download latest keys_hashed.txt and KEYDB.cfg
+ - Auto downloading of latest keys_hashed.txt and KEYDB.cfg
+ - Auto updating of make MakeMKV Beta Key
 
 ## v1.3.0
  - Get Title for DVD and Blu-Rays so that media servesr can identify them easily.

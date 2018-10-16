@@ -31,6 +31,7 @@ See: https://b3n.org/automatic-ripping-machine
 - Auto downloads keys_hashed.txt and KEYDB.cfg using robobrowser and tinydownloader
 - Determines disc type...
   - If video (Blu-Ray or DVD)
+    - Grabs Latest MakeMKV key
     - Retrieve title from disc or Windows Media MetaServices API to name the folder "movie title (year)" so that Plex or Emby can pick it up
     - Determine if video is Movie or TV using OMDb API
     - Rip using MakeMKV or HandBrake (can rip all features or main feature)
@@ -130,6 +131,7 @@ sudo ln -s /opt/arm/arm.yaml /etc/arm/
 **Configure ARM**
 
 - Edit your "config" file (located at /opt/arm/arm.yaml) to determine what options you'd like to use.  Pay special attention to the 'directory setup' section and make sure the 'arm' user has write access to wherever you define these directories.
+
 
 - Edit the music config file (located at /home/arm/.abcde.conf)
 
