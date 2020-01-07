@@ -80,7 +80,6 @@ def log_arm_params(disc):
 
 
 def main(logfile, disc):
-
     """main dvd processing function"""
     logging.info("Starting Disc identification")
 

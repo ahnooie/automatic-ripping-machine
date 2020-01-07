@@ -217,13 +217,14 @@ def rip_data(disc, datapath, logfile):
         if (disc.label) == "":
             disc.label = "datadisc"
 
-        filename = os.path.join(datapath, disc.label + ".iso")
+        incomplete_filename = os.path.join(datapath, disc.label + ".part")
+        final_filename = os.path.join(datapath, disc.label + ".iso")
 
-        logging.info("Ripping data disc to: " + filename)
+        logging.info("Ripping data disc to: " + incomplete_filename)
 
         cmd = 'cat "{0}" > "{1}" 2>> {2}'.format(
             disc.devpath,
-            filename,
+            incomplete_filename,
             logfile
         )
 
@@ -235,11 +236,12 @@ def rip_data(disc, datapath, logfile):
                 shell=True
             ).decode("utf-8")
             logging.info("Data rip call successful")
+            os.rename(incomplete_filename, final_filename)
             return True
         except subprocess.CalledProcessError as dd_error:
             err = "Data rip failed with code: " + str(dd_error.returncode) + "(" + str(dd_error.output) + ")"
             logging.error(err)
-            # sys.exit(err)
+            os.unlink(incomplete_filename)
 
     return False
 
