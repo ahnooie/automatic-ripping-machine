@@ -71,6 +71,32 @@ Install...
 
 Optionally if you want something more stable than master you can download the latest release from the releases page.
 
+## Automated virtual machine setup
+As an alternative to manual installation, a virtual machine can be setup in an automated fashion. This requires [Vagrant](https://www.vagrantup.com/downloads.html) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) in addition to [git](https://git-scm.com/downloads) to be installed on the host machine.
+
+For Ubuntu run the following:
+
+    sudo apt install vagrant virtualbox
+
+To setup the virtual machine (for any OS)
+
+    git clone https://github.com/ahnooie/automatic-ripping-machine.git arm
+    cd arm
+
+Copy config.sample to config and configure as desired. The `arm` directory you just created will be mounted to `/vagrant/` in the virtual machine, so that can be used as a base path to easily access the ripped files. So at a minimum, it's recommended to change the ARMPATH, RAWPATH and MEDIA_DIR settings to start with `/vagrant/`. You can also use the CIFS variabels to mount a Windows share where movies are saved. It's recommended to only use it for the MEDIA_DIR setting to avoid network latency when ripping.
+
+With the config in place, start the machine. It's also created and provisioned (set up), which takes a long time.
+
+    vagrant up
+
+When it's done, stop the machine.
+
+    vagrant halt
+
+Open the VirtualBox program and configure the virtual machine to access your physical DVD/Blu-ray drive(s). Then start the machine again.
+
+    vagrant up
+
 ## Usage
 
 - Insert disc
