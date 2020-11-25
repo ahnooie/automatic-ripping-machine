@@ -19,3 +19,4 @@ arm.yaml
 *.json
 .abdce.conf
 *.old
+*.sw?

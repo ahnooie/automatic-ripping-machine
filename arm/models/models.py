@@ -64,8 +64,11 @@ class Job(db.Model):
         # print("Entering disc")
         context = pyudev.Context()
         device = pyudev.Devices.from_device_file(context, self.devpath)
+        self.set_disctype(device.items())
+
+    def set_disctype(self, iterable):
         self.disctype = "unknown"
-        for key, value in device.items():
+        for key, value in iterable:
             if key == "ID_FS_LABEL":
                 self.label = value
                 if value == "iso9660":
@@ -76,8 +79,6 @@ class Job(db.Model):
                 self.disctype = "dvd"
             elif key == "ID_CDROM_MEDIA_TRACK_COUNT_AUDIO":
                 self.disctype = "music"
-            else:
-                pass
 
     def get_pid(self):
         pid = os.getpid()

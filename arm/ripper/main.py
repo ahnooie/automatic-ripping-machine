@@ -26,6 +26,8 @@ def entry():
     """ Entry to program, parses arguments"""
     parser = argparse.ArgumentParser(description='Process disc using ARM')
     parser.add_argument('-d', '--devpath', help='Devpath', required=True)
+    parser.add_argument('-t', '--disctype', help='udev disctype', required=False)
+    parser.add_argument('-l', '--label', help='udev label', required=False)
 
     return parser.parse_args()
 
@@ -379,6 +381,17 @@ if __name__ == "__main__":
     print(devpath)
 
     job = Job(devpath)
+
+    # override disctype from commandline (required in Docker, no udev)
+    udev = {}
+    if args.disctype:
+        (k, v) = args.disctype.split('=', 1)
+        udev[k] = v
+    if args.label:
+        (k, v) = args.label.split('=', 1)
+        udev[k] = v
+    if args.disctype or args.label:
+        job.set_disctype(udev.items())
 
     logfile = logger.setuplogging(job)
     print("Log: " + logfile)

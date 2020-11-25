@@ -1,0 +1,8 @@
+# docker-arm.rules
+#   user udev rule to launch ARM automagically whenever new media is inserted
+#
+# this rule will trigger twice
+# 1. for the media change event (script exits early in this case)
+# 2. after udev rules have loaded media details
+ACTION=="change", SUBSYSTEM=="block", ENV{DISK_MEDIA_CHANGE}=="1", ENV{ID_TYPE}=="cd", RUN+="/opt/arm/scripts/docker_arm_wrapper.sh %k"
+

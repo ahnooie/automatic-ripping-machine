@@ -1,0 +1,34 @@
+# unknown (so far)
+#pycurl>=7.43.0
+
+# development
+#flake8>=2.5.0
+
+# UI
+flask>=1.0.2
+flask-WTF>=0.14.2
+flask-sqlalchemy>=2.3.2
+flask-migrate>=2.2.1
+netifaces>=0.10.9
+urllib3>=1.13.1
+
+# config
+pyyaml>=3.12
+
+# models
+psutil>=5.4.6
+pyudev>=0.21.0
+
+# ripper
+#omdb>=0.10.0
+#psutil>=5.4.6
+#pushbullet.py>=0.11.0
+#pydvdid>=1.0
+#pyfttt>=0.3.2
+#python-pushover>=0.3
+#pyudev>=0.21.0
+#requests>=2.9.1
+#robobrowser>=0.5.3
+#tinydownload>=0.1.0
+#urllib3>=1.13.1
+#xmltodict>=0.10.2
